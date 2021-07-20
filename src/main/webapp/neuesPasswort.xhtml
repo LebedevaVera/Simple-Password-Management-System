@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<f:event listener="#{sessionHandler.checkLoggedIn}" type="preRenderView"/>
+	<h:body>
+		<ui:composition template="templates/commonLocked.xhtml">
+	   		<ui:define name="title">Neues Passwort</ui:define>
+	   		<ui:define name="styles">
+    			<link rel="stylesheet" href="styles/optional.css" type="text/css" />
+    		</ui:define>
+	   		
+	   		<ui:define name="content">
+	            <h:form>
+	                <h:panelGrid columns="2" headerClass="header" footerClass="footer">
+	                    <h:outputLabel value="Passwort: " for="pw" />
+	                    <h:panelGroup>
+	                        <h:inputText id="pw"
+	                                     value="#{sessionHandler.pw.pw}" required="true"
+	                                     requiredMessage="Eingabe fehlt">
+	                        </h:inputText>
+	                        <h:message for="pw" styleClass="message" />
+	                    </h:panelGroup>
+	                    <h:outputLabel value="Für: " for="usedFor" />
+	                    <h:panelGroup>
+	                        <h:inputText id="usedFor" value="#{sessionHandler.pw.usedFor}"
+	                                     required="true" requiredMessage="Eingabe fehlt">
+	                        </h:inputText>
+	                        <h:message for="usedFor" styleClass="message" />
+	                    </h:panelGroup>
+	                    <h:panelGroup/>
+	                    <h:panelGroup>
+	                        <h:selectOneMenu id="anrede"
+	                                         value="#{sessionHandler.pw.nutzung}">
+	                            <f:selectItems var="form" value="#{sessionHandler.pw.nutzungValues}"
+	                                           itemValue="#{form}" itemLabel="#{form.label}" />
+	                        </h:selectOneMenu>
+	                    </h:panelGroup>
+	                    <h:commandButton action="#{sessionHandler.speichern()}"
+	                                     value="Speichern" />
+	                </h:panelGrid>
+	            </h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

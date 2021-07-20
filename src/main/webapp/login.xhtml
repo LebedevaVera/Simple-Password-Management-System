@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:body>
+		<ui:composition template="templates/common.xhtml">
+	   		<ui:define name="title">Login</ui:define>
+	   		<ui:define name="styles">
+	   			<link rel="stylesheet" href="styles/optional.css" type="text/css" />
+	   		</ui:define>
+	   		
+	   		<ui:define name="content">
+	   			<h3>Anmeldung</h3>
+				<h:form>
+					<h:panelGrid id="grid" columns="2">
+						<h:outputLabel value="Username:" for="username" />
+						<h:panelGroup>
+							<h:inputText id="username" required="true" requiredMessage="Eingabe fehlt"
+								value="#{sessionHandler.username}" />
+							<h:message for="username" class="message" />
+						</h:panelGroup>
+						<h:outputLabel value="Passwort:" for="passwort" />
+						<h:panelGroup>
+							 <h:inputSecret id="passwort" required="true" requiredMessage="Eingabe fehlt"
+								value="#{sessionHandler.passwort}" />
+							<h:message for="passwort" class="message" />
+						</h:panelGroup>
+						<h:commandButton action="#{sessionHandler.login}" value="Login" />
+					</h:panelGrid>
+					<h:messages styleClass="errorMessage" globalOnly="true" />
+				</h:form>
+				<f:facet name="header">Registrieren</f:facet>
+				<h:form>
+					<h:commandButton action="#{kundenHandler.neu}" value="Registrieren" />
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

@@ -1,0 +1,27 @@
+input[type="submit"] {
+	padding: 3px;
+}
+
+.sort-form input[type="submit"] {
+	font-size: small;
+}
+
+#content form {
+	display: block;
+}
+
+#content {
+	text-align: left;
+}
+
+.sort-form {
+	text-align: center;
+}
+
+#user-actions-wrapper form {
+	display: inline;
+}
+
+#passwords-tbl {
+	margin-top: 20px;
+}

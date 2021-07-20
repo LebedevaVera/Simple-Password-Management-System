@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:body>
+		<ui:composition template="templates/commonLocked.xhtml">
+    		<ui:define name="title">Edit Profile</ui:define>
+    		<ui:define name="styles">
+    			<link rel="stylesheet" href="styles/optional.css" type="text/css" />
+    		</ui:define>
+    		
+    		<ui:define name="content">
+    			<h3>Edit Profile</h3>
+		        <h:form id="neuerKunde">
+		            <h:panelGrid columns="2" headerClass="header" footerClass="footer">
+		                <h:outputLabel value="Anrede:" for="anrede" />
+		                <h:panelGroup>
+		                    <h:selectOneMenu id="anrede"
+		                                     value="#{sessionHandler.kunde.anrede}">
+		                        <f:selectItems var="form" value="#{kundenHandler.anredeValues}"
+		                                       itemValue="#{form}" itemLabel="#{form.label}" />
+		                    </h:selectOneMenu>
+		                </h:panelGroup>
+		                <h:outputLabel value="Vorname:" for="vorname" />
+		                <h:panelGroup>
+		                    <h:inputText required="true" requiredMessage="Eingabe fehlt"
+		                                 id="vorname" value="#{sessionHandler.kunde.vorname}" />
+		                    <h:message for="vorname" class="message" />
+		                </h:panelGroup>
+		                <h:outputLabel value="Nachname:" for="nachname" />
+		                <h:panelGroup>
+		                    <h:inputText required="true" requiredMessage="Eingabe fehlt"
+		                                 id="nachname" value="#{sessionHandler.kunde.nachname}" />
+		                    <h:message for="nachname" class="message" />
+		                </h:panelGroup>
+		                <h:outputLabel value="Passwort:" for="passwort" />
+		                <h:panelGroup>
+		                    <h:inputSecret required="true" requiredMessage="Eingabe fehlt"
+		                                   id="passwort" value="#{sessionHandler.kunde.passwort}" />
+		                    <h:message for="passwort" class="message" />
+		                </h:panelGroup>
+		                <h:outputLabel value="Geburtsdatum:" for="geburtsdatum" />
+		                <h:panelGroup>
+		                    <h:inputText required="true" requiredMessage="Eingabe fehlt"
+		                                 id="geburtsdatum" value="#{sessionHandler.kunde.geburtsdatum}">
+		                        <f:convertDateTime timeZone="CET" pattern="dd.MM.yyyy" />
+		                    </h:inputText>
+		                    <h:message for="geburtsdatum" class="message" />
+		                </h:panelGroup>
+		                <h:commandButton action="#{sessionHandler.speichern()}"
+		                                 value="Speichern" />
+		            </h:panelGrid>
+		        </h:form>
+	    	</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

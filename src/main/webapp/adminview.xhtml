@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+	<h:body>
+		<ui:composition template="templates/commonLockedAdmin.xhtml">
+	   		<ui:define name="title">Adminview</ui:define>
+	   		<ui:define name="content">
+	   			<div id="logout">
+			        <ui:insert name="logout">
+			            <h:form>
+			                <h:commandButton action="#{sessionHandler.logout}" value="Logout"/>
+			            </h:form>
+			        </ui:insert>
+			    </div>
+	            <h:dataTable var="kunde" value="#{kundenHandler.getKunden()}"
+	                         rowClasses="odd,even" headerClass="header" class="main-tbl">
+	                <f:facet name="header">Kunden</f:facet>
+	                <h:column>
+	                    <f:facet name="header">Username</f:facet>
+	                    <h:outputText value="#{kunde.username}" />
+	                </h:column>
+	                <h:column>
+	                    <f:facet name="header">Anrede</f:facet>
+	                    <h:outputText value="#{kunde.anrede.label}" />
+	                </h:column>
+	                <h:column>
+	                    <f:facet name="header">Vorname</f:facet>
+	                    <h:outputText value="#{kunde.vorname}" />
+	                </h:column>
+	                <h:column>
+	                    <f:facet name="header">Nachname</f:facet>
+	                    <h:outputText value="#{kunde.nachname}" />
+	                </h:column>
+	                <h:column>
+	                    <f:facet name="header">Geburtsdatum</f:facet>
+	                    <div style="text-align: center;">
+	                        <h:outputText value="#{kunde.geburtsdatum}" >
+								<f:convertDateTime timeZone="CET" pattern="dd.MM.yyyy" />
+							</h:outputText>
+	                    </div>
+	                </h:column>
+	                <h:column>
+	                    <f:facet name="header">Löschen</f:facet>
+	                    <h:form>
+	                        <h:commandButton action="#{kundenHandler.delete()}"
+	                                         value="Löschen" />
+	                    </h:form>
+	                </h:column>
+	                <h:column>
+	                    <f:facet name="header">Edit</f:facet>
+	                    <h:form>
+	                        <h:commandButton action="#{kundenHandler.edit()}"
+	                                         value="Edit" />
+	                    </h:form>
+	                </h:column>
+	                <h:column>
+	                    <f:facet name="header">View</f:facet>
+	                <h:form>
+	                    <h:commandButton action="#{kundenHandler.createPasswordview()}"
+	                                     value="Passwörter einsehen" />
+	                </h:form>
+	                </h:column>
+	            </h:dataTable>
+	    	</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

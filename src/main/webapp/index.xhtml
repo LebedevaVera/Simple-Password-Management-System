@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:body>
+    	<ui:composition template="templates/common.xhtml" >
+    		<ui:define name="title">Welcome</ui:define>    
+    		<ui:define name="styles">
+    			<link rel="stylesheet" href="styles/index.css" type="text/css" />
+    		</ui:define>
+
+			<ui:define name="content">
+				<h:column>
+					<f:facet name="header">Registrieren</f:facet>
+					<h:form id="register-form">
+						<h:commandButton action="#{kundenHandler.neu}" value="Registrieren" />
+					</h:form>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Login</f:facet>
+					<h:form id="login-form">
+						<h:commandButton action="login.xhtml" value="Login" />
+					</h:form>
+				</h:column>
+		    </ui:define>
+		</ui:composition>
+    </h:body>
+</html>

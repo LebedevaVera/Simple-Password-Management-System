@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+	<f:event listener="#{sessionHandler.checkLoggedIn}" type="preRenderView"/>
+	<h:body>
+		<ui:composition template="templates/commonLocked.xhtml">
+    		<ui:define name="title">Meine Passwörter</ui:define>
+    		<ui:define name="styles">
+    			<link rel="stylesheet" href="styles/main.css" type="text/css" />
+    		</ui:define>
+    		
+    		<ui:define name="content">
+                <h:column>
+                    <f:facet name="header">Welcome</f:facet>
+                    <h:outputText value="Willkommen, #{sessionHandler.kunde.vorname}"/>
+                </h:column>
+                <h:panelGroup layout="block" id="user-actions-wrapper">
+	                <h:form>
+	                    <h:commandButton action="#{sessionHandler.addPassword}" value="Neues Passwort"/>
+	                </h:form>
+	                <h:form>
+		                <h:commandButton action="#{sessionHandler.editProfile}" value="Profil editieren"/>
+		            </h:form>
+		            <h:form>
+		                <h:commandButton action="#{sessionHandler.logout}" value="Logout"/>
+		            </h:form>
+		    	</h:panelGroup>
+		    	
+		    	<h:panelGroup layout="block" id="passwords-tbl">
+	                <h:form class="sort-form">
+	                    <h:commandButton action="#{sessionHandler.sortByName}"
+	                                     value="Alphabetisch sortieren" />
+	                    <h:commandButton action="#{sessionHandler.sortByNutzung}"
+	                                     value="Nach Nutzung sortieren" />
+	                </h:form>
+		            <h:dataTable var="x" value="#{sessionHandler.kunde.getPasswortList()}"
+		                         rowClasses="odd,even" headerClass="header" class="main-tbl">
+		                <f:facet name="header">Passwörter</f:facet>
+		                <h:column>
+		                    <f:facet name="header">Passwort</f:facet>
+		                    <h:outputText value="#{x.pw}"/>
+		                </h:column>
+		                <h:column>
+		                    <f:facet name="header">Benutzt für</f:facet>
+		                    <h:outputText value="#{x.usedFor}"/>
+		                </h:column>
+		                <h:column>
+		                    <f:facet name="header">Nutzung</f:facet>
+		                    <h:outputText value="#{x.nutzung.label}"/>
+		                </h:column>
+		                <h:column>
+		                    <f:facet name="header">Editieren</f:facet>
+		                    <h:form>
+		                        <h:commandButton action="#{sessionHandler.edit(x)}"
+		                                         value="Edit &#128394;" />
+		                    </h:form>
+		                </h:column>
+		                <h:column>
+		                    <f:facet name="header">Editieren</f:facet>
+		                    <h:form>
+		                        <h:commandButton action="#{sessionHandler.loeschen(x)}"
+		                                         value="Löschen &#128465;" />
+		                    </h:form>
+		                </h:column>
+		            </h:dataTable>	
+				</h:panelGroup>    
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>
